@@ -1,0 +1,15 @@
+# Project exclude paths
+/.gradle/
+/build/
+/local.properties
+/.kotlin/
+
+# Project exclude paths
+/library/build/
+/library/build/classes/kotlin/iosArm64/main/klib/
+/library/build/classes/kotlin/iosSimulatorArm64/main/klib/
+/library/build/classes/kotlin/iosX64/main/klib/
+/library/build/classes/kotlin/js/main/
+/library/build/classes/kotlin/jvm/main/
+/library/build/classes/kotlin/macosArm64/main/klib/
+/library/build/classes/kotlin/macosX64/main/klib/

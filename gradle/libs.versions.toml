@@ -1,0 +1,24 @@
+[versions]
+android-gradle = "8.5.2"
+compose = "1.7.0-alpha03"
+jna = "5.14.0"
+jsystemthemedetector = "7dde337429"
+korlibs = "6.0.0"
+kotlin = "2.0.10"
+mavenPublish = "0.29.0"
+
+[libraries]
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }
+jsystemthemedetector = { module = "com.github.zacharee:jSystemThemeDetector", version.ref = "jsystemthemedetector" }
+korlibs-io = { module = "com.soywiz:korlibs-io", version.ref = "korlibs" }
+korlibs-platform = { module = "com.soywiz:korlibs-platform", version.ref = "korlibs" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+
+[plugins]
+android-library = { id = "com.android.library", version.ref = "android-gradle" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

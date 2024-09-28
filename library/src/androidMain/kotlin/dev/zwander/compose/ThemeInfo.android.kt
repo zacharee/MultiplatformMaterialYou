@@ -57,6 +57,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
         ThemeInfo(
             isDarkMode = dark,
             colors = colorScheme,
+            seedColor = colorScheme.primary,
         )
     }
 }

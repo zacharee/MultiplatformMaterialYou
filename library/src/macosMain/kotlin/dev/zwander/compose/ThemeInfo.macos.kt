@@ -53,6 +53,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
         ThemeInfo(
             isDarkMode = isDark,
             colors = ColorScheme(accentColor.toArgb(), isDark).toComposeColorScheme(),
+            seedColor = accentColor,
         )
     }
 }

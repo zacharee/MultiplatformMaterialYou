@@ -68,18 +68,21 @@ actual fun rememberThemeInfo(): ThemeInfo {
         style = UITraitCollection.currentTraitCollection.userInterfaceStyle
     }
 
+    val seedColor = if (red != null && green != null && blue != null && alpha != null) {
+        Color(red.toFloat(), green.toFloat(), blue.toFloat(), alpha.toFloat())
+    } else {
+        MacOSColors.ACCENT_BLUE
+    }.toArgb()
+
     val colorScheme = ColorScheme(
-        if (red != null && green != null && blue != null && alpha != null) {
-            Color(red.toFloat(), green.toFloat(), blue.toFloat(), alpha.toFloat())
-        } else {
-            MacOSColors.ACCENT_BLUE
-        }.toArgb(),
+        seedColor,
         dark
     ).toComposeColorScheme()
 
     val colors = ThemeInfo(
         isDarkMode = dark,
         colors = colorScheme,
+        seedColor = seedColor,
     )
 
     val backgroundColor = colorScheme.background

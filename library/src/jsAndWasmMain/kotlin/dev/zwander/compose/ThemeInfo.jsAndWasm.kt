@@ -14,5 +14,6 @@ actual fun rememberThemeInfo(): ThemeInfo {
     return ThemeInfo(
         isDarkMode = isSystemInDarkTheme(),
         colors = ColorScheme(LocalAccentColor.current.toArgb(), isSystemInDarkTheme()).toComposeColorScheme(),
+        seedColor = LocalAccentColor.current,
     )
 }

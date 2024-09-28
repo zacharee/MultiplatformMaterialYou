@@ -82,7 +82,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
     val colors = ThemeInfo(
         isDarkMode = dark,
         colors = colorScheme,
-        seedColor = seedColor,
+        seedColor = Color(seedColor),
     )
 
     val backgroundColor = colorScheme.background

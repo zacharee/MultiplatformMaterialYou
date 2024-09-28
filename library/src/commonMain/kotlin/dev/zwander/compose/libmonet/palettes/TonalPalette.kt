@@ -34,6 +34,10 @@ class TonalPalette private constructor(
         return color
     }
 
+    fun shade(shade: Int): Int {
+        return tone(((1000.0 - shade) / 10.0).toInt())
+    }
+
     /** Given a tone, use hue and chroma of palette to create a color, and return it as HCT.  */
     fun getHct(tone: Double): Hct {
         return Hct.from(this.hue, this.chroma, tone)

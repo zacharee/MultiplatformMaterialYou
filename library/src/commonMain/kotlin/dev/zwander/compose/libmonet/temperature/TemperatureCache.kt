@@ -309,7 +309,7 @@ class TemperatureCache
             val hue: Double = sanitizeDegreesDouble(
                 atan2(
                     lab[2], lab[1]
-                ).degrees.degrees
+                ).radians.degrees
             )
             val chroma = hypot(lab[1], lab[2])
             return (-0.5
@@ -317,7 +317,7 @@ class TemperatureCache
                     * chroma.pow(1.07) * cos(
                 sanitizeDegreesDouble(
                     hue - 50.0
-                ).radians.radians
+                ).degrees.radians
             )))
         }
 

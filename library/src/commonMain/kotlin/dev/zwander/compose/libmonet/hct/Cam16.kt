@@ -137,7 +137,7 @@ class Cam16
 
         val t: Double =
             (alpha / (1.64 - 0.29.pow(viewingConditions.n)).pow(0.73)).pow(1.0 / 0.9)
-        val hRad: Double = hue.radians.radians
+        val hRad: Double = hue.degrees.radians
 
         val eHue = 0.25 * (cos(hRad + 2.0) + 3.8)
         val ac: Double =
@@ -266,13 +266,13 @@ class Cam16
 
             // hue
             val atan2 = atan2(b, a)
-            val atanDegrees: Double = atan2.degrees.degrees
+            val atanDegrees: Double = atan2.radians.degrees
             val hue =
                 if (atanDegrees < 0)
                     atanDegrees + 360.0
                 else
                     if (atanDegrees >= 360) atanDegrees - 360.0 else atanDegrees
-            val hueRadians: Double = hue.radians.radians
+            val hueRadians: Double = hue.degrees.radians
 
             // achromatic response to color
             val ac: Double = p2 * viewingConditions.nbb
@@ -289,7 +289,7 @@ class Cam16
 
             // CAM16 chroma, colorfulness, and saturation.
             val huePrime = if ((hue < 20.14)) hue + 360 else hue
-            val eHue = 0.25 * (cos(huePrime.radians.radians + 2.0) + 3.8)
+            val eHue = 0.25 * (cos(huePrime.degrees.radians + 2.0) + 3.8)
             val p1: Double =
                 50000.0 / 13.0 * eHue * viewingConditions.nc * viewingConditions.ncb
             val t = p1 * hypot(a, b) / (u + 0.305)
@@ -338,7 +338,7 @@ class Cam16
             val s =
                 50.0 * sqrt((alpha * viewingConditions.c) / (viewingConditions.aw + 4.0))
 
-            val hueRadians: Double = h.radians.radians
+            val hueRadians: Double = h.degrees.radians
             val jstar = (1.0 + 100.0 * 0.007) * j / (1.0 + 0.007 * j)
             val mstar = 1.0 / 0.0228 * ln1p(0.0228 * m)
             val astar = mstar * cos(hueRadians)

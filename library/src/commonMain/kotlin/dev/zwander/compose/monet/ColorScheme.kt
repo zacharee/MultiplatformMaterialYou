@@ -193,7 +193,7 @@ enum class Style(internal val coreSpec: CoreSpec) {
 class ColorScheme(
     val seed: Int,
     val darkTheme: Boolean,
-    val style: Style = Style.TONAL_SPOT
+    val style: Style = Style.TONAL_SPOT,
 ) {
     val accent1: List<Int>
     val accent2: List<Int>

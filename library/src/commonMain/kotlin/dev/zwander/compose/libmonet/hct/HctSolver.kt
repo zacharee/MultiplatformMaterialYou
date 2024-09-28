@@ -498,11 +498,11 @@ object HctSolver {
     }
 
     fun criticalPlaneBelow(x: Double): Int {
-        return floor(x - 0.5) as Int
+        return floor(x - 0.5).toInt()
     }
 
     fun criticalPlaneAbove(x: Double): Int {
-        return ceil(x - 0.5) as Int
+        return ceil(x - 0.5).toInt()
     }
 
     /**
@@ -532,7 +532,7 @@ object HctSolver {
                     if (abs((rPlane - lPlane).toDouble()) <= 1) {
                         break
                     } else {
-                        val mPlane = floor((lPlane + rPlane) / 2.0) as Int
+                        val mPlane = floor((lPlane + rPlane) / 2.0).toInt()
                         val midPlaneCoordinate = CRITICAL_PLANES[mPlane]
                         val mid = setCoordinate(left, midPlaneCoordinate, right, axis)
                         val midHue = hueOf(mid)

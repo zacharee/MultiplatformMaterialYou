@@ -23,12 +23,16 @@ actual fun rememberThemeInfo(): ThemeInfo {
     val isAndroid12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val dark = isSystemInDarkTheme()
     val isOneUI = remember {
-        context.packageManager.hasSystemFeature("com.samsung.feature.samsung_experience_mobile")
+        context.packageManager.hasSystemFeature("com.samsung.feature.samsung_experience_mobile") ||
+                context.packageManager.hasSystemFeature("com.samsung.feature.samsung_experience_mobile_lite")
     }
+    val isOneUIUPre611 = isOneUI &&
+            Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+            (Class.forName("android.os.SystemProperties").getMethod("getInt", String::class.java, Int::class.java).invoke(null, "ro.build.version.oneui", 0) as Int) < 60101
     val colorScheme = remember(dark, isAndroid12) {
         if (dark) {
             if (isAndroid12) {
-                if (isOneUI) {
+                if (isOneUIUPre611) {
                     dynamicDarkColorScheme31(dynamicTonalPalette(context))
                 } else {
                     dynamicDarkColorScheme(context)
@@ -38,7 +42,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
             }
         } else {
             if (isAndroid12) {
-                if (isOneUI) {
+                if (isOneUIUPre611) {
                     dynamicLightColorScheme31(dynamicTonalPalette(context))
                 } else {
                     dynamicLightColorScheme(context)

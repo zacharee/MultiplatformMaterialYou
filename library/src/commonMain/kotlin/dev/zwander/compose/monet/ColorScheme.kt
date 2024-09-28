@@ -138,6 +138,7 @@ internal class CoreSpec(
     val n2: TonalSpec
 )
 
+@Deprecated("Use dev.zwander.compose.libmonet.Style instead.")
 enum class Style(internal val coreSpec: CoreSpec) {
     SPRITZ(CoreSpec(
             a1 = TonalSpec(HueSource(), ChromaConstant(12.0)),
@@ -190,6 +191,7 @@ enum class Style(internal val coreSpec: CoreSpec) {
     )),
 }
 
+@Deprecated("Use dev.zwander.compose.libmonet.ColorScheme instead.")
 class ColorScheme(
     val seed: Int,
     val darkTheme: Boolean,

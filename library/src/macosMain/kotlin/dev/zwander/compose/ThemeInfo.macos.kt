@@ -7,9 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.toArgb
+import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.macOsColorKeyToColor
 import platform.Foundation.NSUserDefaults
-import dev.zwander.compose.monet.ColorScheme
 import platform.Foundation.NSDistributedNotificationCenter
 import platform.Foundation.NSNotification
 

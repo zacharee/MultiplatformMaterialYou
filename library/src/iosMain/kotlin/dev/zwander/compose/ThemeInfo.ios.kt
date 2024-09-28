@@ -9,6 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.interop.LocalUIViewController
+import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.MacOSColors
 import dev.zwander.compose.util.TraitEffect
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -22,7 +23,6 @@ import platform.UIKit.UIColor
 import platform.UIKit.UITraitCollection
 import platform.UIKit.UIUserInterfaceStyle
 import platform.UIKit.currentTraitCollection
-import dev.zwander.compose.monet.ColorScheme
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable

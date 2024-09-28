@@ -11,11 +11,11 @@ import androidx.compose.ui.graphics.toArgb
 import com.jthemedetecor.OsThemeDetector
 import com.sun.jna.platform.win32.Advapi32Util
 import com.sun.jna.platform.win32.WinReg
+import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.LinuxAccentColorGetter
 import dev.zwander.compose.util.UserDefaults
 import org.jetbrains.skiko.OS
 import org.jetbrains.skiko.hostOs
-import dev.zwander.compose.monet.ColorScheme
 
 @Composable
 actual fun rememberThemeInfo(): ThemeInfo {

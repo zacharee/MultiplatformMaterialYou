@@ -71,9 +71,10 @@ val seedColor = Color(100, 255, 0).toArgb()
 val isDark = isSystemInDarkTheme()
 
 val colorScheme = ColorScheme(
-    seed = seedColor,
-    darkTheme = isDark,
+    seedColor = seedColor,
+    isDark = isDark,
     style = Style.SPRITZ, // optional
+    contrast = 0.0 // optional, between -1 and 1
 )
 
 val composeColorScheme = colorScheme.toComposeColorScheme()

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import dev.zwander.compose.monet.ColorScheme
+import dev.zwander.compose.libmonet.scheme.ColorScheme
 
 val LocalAccentColor = compositionLocalOf { Color(red = 208, green = 188, blue = 255) }
 

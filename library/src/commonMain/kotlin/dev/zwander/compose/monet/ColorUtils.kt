@@ -2,10 +2,13 @@ package dev.zwander.compose.monet
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import korlibs.math.clamp
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
+import kotlin.math.round
+
 
 @Suppress("FunctionName", "MemberVisibilityCanBePrivate")
 object ColorUtils {
@@ -133,4 +136,77 @@ object ColorUtils {
         }
         return color and 0x00ffffff or (alpha shl 24)
     }
+
+    /**
+     * Convert HSL (hue-saturation-lightness) components to a RGB color.
+     *
+     *  * hsl[0] is Hue [0 .. 360)
+     *  * hsl[1] is Saturation [0...1]
+     *  * hsl[2] is Lightness [0...1]
+     *
+     * If hsv values are out of range, they are pinned.
+     *
+     * @param hsl 3-element array which holds the input HSL components
+     * @return the resulting RGB color
+     */
+    fun HSLToColor(hsl: DoubleArray): Int {
+        val h = hsl[0]
+        val s = hsl[1]
+        val l = hsl[2]
+
+        val c = ((1f - abs((2 * l - 1f))) * s).toFloat()
+        val m = l - 0.5f * c
+        val x = (c * (1f - abs(((h / 60f % 2f) - 1f)))).toFloat()
+
+        val hueSegment = h.toInt() / 60
+
+        var r = 0
+        var g = 0
+        var b = 0
+
+        when (hueSegment) {
+            0 -> {
+                r = round(255 * (c + m)).toInt()
+                g = round(255 * (x + m)).toInt()
+                b = round(255 * m).toInt()
+            }
+
+            1 -> {
+                r = round(255 * (x + m)).toInt()
+                g = round(255 * (c + m)).toInt()
+                b = round(255 * m).toInt()
+            }
+
+            2 -> {
+                r = round(255 * m).toInt()
+                g = round(255 * (c + m)).toInt()
+                b = round(255 * (x + m)).toInt()
+            }
+
+            3 -> {
+                r = round(255 * m).toInt()
+                g = round(255 * (x + m)).toInt()
+                b = round(255 * (c + m)).toInt()
+            }
+
+            4 -> {
+                r = round(255 * (x + m)).toInt()
+                g = round(255 * m).toInt()
+                b = round(255 * (c + m)).toInt()
+            }
+
+            5, 6 -> {
+                r = round(255 * (c + m)).toInt()
+                g = round(255 * m).toInt()
+                b = round(255 * (x + m)).toInt()
+            }
+        }
+
+        r = r.clamp(0, 255)
+        g = g.clamp(0, 255)
+        b = b.clamp(0, 255)
+
+        return Color(r, g, b).toArgb()
+    }
+
 }

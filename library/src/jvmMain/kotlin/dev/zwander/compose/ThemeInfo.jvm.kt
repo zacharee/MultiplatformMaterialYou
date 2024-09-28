@@ -76,6 +76,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
         ThemeInfo(
             isDarkMode = dark,
             colors = composeColorScheme,
+            seedColor = Color(accentColor),
         )
     }
 }

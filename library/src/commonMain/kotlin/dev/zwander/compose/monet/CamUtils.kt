@@ -1,6 +1,9 @@
 package dev.zwander.compose.monet
 
 import androidx.compose.ui.graphics.Color
+import dev.zwander.compose.util.blue
+import dev.zwander.compose.util.green
+import dev.zwander.compose.util.red
 import kotlin.math.cbrt
 import kotlin.math.pow
 import kotlin.math.round
@@ -209,20 +212,18 @@ object CamUtils {
     }
 
     fun yFromInt(argb: Int): Double {
-        val color = Color(argb)
-        val r = linearized((color.red * 255).toInt())
-        val g = linearized((color.green * 255).toInt())
-        val b = linearized((color.blue * 255).toInt())
+        val r = linearized(Color.red(argb))
+        val g = linearized(Color.green(argb))
+        val b = linearized(Color.blue(argb))
         val matrix = SRGB_TO_XYZ
         val y = r * matrix[1][0] + g * matrix[1][1] + b * matrix[1][2]
         return y
     }
 
     fun xyzFromInt(argb: Int): DoubleArray {
-        val color = Color(argb)
-        val r = linearized((color.red * 255).toInt())
-        val g = linearized((color.green * 255).toInt())
-        val b = linearized((color.blue * 255).toInt())
+        val r = linearized(Color.red(argb))
+        val g = linearized(Color.green(argb))
+        val b = linearized(Color.blue(argb))
         val matrix = SRGB_TO_XYZ
         val x = r * matrix[0][0] + g * matrix[0][1] + b * matrix[0][2]
         val y = r * matrix[1][0] + g * matrix[1][1] + b * matrix[1][2]

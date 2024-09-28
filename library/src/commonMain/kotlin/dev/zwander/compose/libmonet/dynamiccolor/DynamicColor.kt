@@ -172,7 +172,7 @@ class DynamicColor {
         if (opacity == null) {
             return argb
         }
-        val percentage: Double = opacity!!(scheme)
+        val percentage: Double = opacity.invoke(scheme)
         val alpha: Int =
             clampInt(0, 255, round(percentage * 255).toInt())
         return (argb and 0x00ffffff) or (alpha shl 24)
@@ -212,7 +212,7 @@ class DynamicColor {
 
         // Case 1: dual foreground, pair of colors with delta constraint.
         if (toneDeltaPair != null) {
-            val toneDeltaPair: ToneDeltaPair = toneDeltaPair!!(scheme)
+            val toneDeltaPair: ToneDeltaPair = toneDeltaPair.invoke(scheme)
             val roleA: DynamicColor = toneDeltaPair.roleA
             val roleB: DynamicColor = toneDeltaPair.roleB
             val delta: Double = toneDeltaPair.delta

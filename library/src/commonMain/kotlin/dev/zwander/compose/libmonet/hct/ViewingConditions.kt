@@ -2,7 +2,7 @@ package dev.zwander.compose.libmonet.hct
 
 import dev.zwander.compose.libmonet.utils.ColorUtils
 import dev.zwander.compose.libmonet.utils.MathUtils.clampDouble
-import dev.zwander.compose.monet.lerp
+import dev.zwander.compose.libmonet.utils.MathUtils.lerp
 import kotlin.math.PI
 import kotlin.math.cbrt
 import kotlin.math.exp
@@ -83,11 +83,10 @@ class ViewingConditions
             val bW = (xyz[0] * matrix[2][0]) + (xyz[1] * matrix[2][1]) + (xyz[2] * matrix[2][2])
             val f = 0.8 + (surround / 10.0)
             val c: Double =
-                (
-                        if ((f >= 0.9))
-                            lerp(0.59, 0.69, ((f - 0.9) * 10.0))
-                        else
-                            lerp(0.525, 0.59, ((f - 0.8) * 10.0))).toDouble()
+                (if ((f >= 0.9))
+                    lerp(0.59, 0.69, ((f - 0.9) * 10.0))
+                else
+                    lerp(0.525, 0.59, ((f - 0.8) * 10.0))).toDouble()
             var d =
                 if (discountingIlluminant)
                     1.0

@@ -1,6 +1,6 @@
 package dev.zwander.compose.libmonet.dynamiccolor
 
-import dev.zwander.compose.monet.lerp
+import dev.zwander.compose.libmonet.utils.MathUtils.lerp
 
 
 /**

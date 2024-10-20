@@ -57,13 +57,18 @@ actual fun rememberThemeInfo(): ThemeInfo {
                         )
                     ).rgb
                 } catch (e: Throwable) {
-                    Color(
-                        Advapi32Util.registryGetIntValue(
-                            WinReg.HKEY_CURRENT_USER,
-                            "Software\\Microsoft\\Windows\\DWM",
-                            "ColorizationColor",
-                        )
-                    ).copy(alpha = 1f).toArgb()
+                    try {
+                        Color(
+                            Advapi32Util.registryGetIntValue(
+                                WinReg.HKEY_CURRENT_USER,
+                                "Software\\Microsoft\\Windows\\DWM",
+                                "ColorizationColor",
+                            )
+                        ).copy(alpha = 1f).toArgb()
+                    } catch (e: Throwable) {
+                        println("Unable to retrieve Windows accent color.")
+                        defaultColor.toArgb()
+                    }
                 }
             }
             OS.MacOS -> {

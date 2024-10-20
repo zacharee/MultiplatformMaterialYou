@@ -48,13 +48,23 @@ actual fun rememberThemeInfo(): ThemeInfo {
 
         when (hostOs) {
             OS.Windows -> {
-                java.awt.Color(
-                    Advapi32Util.registryGetIntValue(
-                        WinReg.HKEY_CURRENT_USER,
-                        "Software\\Microsoft\\Windows\\DWM",
-                        "AccentColor",
-                    )
-                ).rgb
+                try {
+                    java.awt.Color(
+                        Advapi32Util.registryGetIntValue(
+                            WinReg.HKEY_CURRENT_USER,
+                            "Software\\Microsoft\\Windows\\DWM",
+                            "AccentColor",
+                        )
+                    ).rgb
+                } catch (e: Throwable) {
+                    Color(
+                        Advapi32Util.registryGetIntValue(
+                            WinReg.HKEY_CURRENT_USER,
+                            "Software\\Microsoft\\Windows\\DWM",
+                            "ColorizationColor",
+                        )
+                    ).copy(alpha = 1f).toArgb()
+                }
             }
             OS.MacOS -> {
                 UserDefaults.standardUserDefaults().getAccentColor().toArgb()

@@ -82,8 +82,6 @@ kotlin {
                 api(compose.ui)
                 api(libs.kotlin.stdlib)
                 api(libs.kotlin.reflect)
-                api(libs.korlibs.io)
-                api(libs.korlibs.platform)
             }
         }
 
@@ -94,6 +92,7 @@ kotlin {
                 api(libs.jsystemthemedetector)
                 api(libs.jna)
                 api(libs.jna.platform)
+                api(libs.jfa)
             }
         }
 

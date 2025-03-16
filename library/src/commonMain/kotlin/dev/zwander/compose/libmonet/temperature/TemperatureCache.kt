@@ -4,8 +4,7 @@ import dev.zwander.compose.libmonet.hct.Hct
 import dev.zwander.compose.libmonet.utils.ColorUtils
 import dev.zwander.compose.libmonet.utils.MathUtils.sanitizeDegreesDouble
 import dev.zwander.compose.libmonet.utils.MathUtils.sanitizeDegreesInt
-import korlibs.math.geom.degrees
-import korlibs.math.geom.radians
+import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -309,7 +308,7 @@ class TemperatureCache
             val hue: Double = sanitizeDegreesDouble(
                 atan2(
                     lab[2], lab[1]
-                ).radians.degrees
+                ) * 180.0 / PI
             )
             val chroma = hypot(lab[1], lab[2])
             return (-0.5
@@ -317,7 +316,7 @@ class TemperatureCache
                     * chroma.pow(1.07) * cos(
                 sanitizeDegreesDouble(
                     hue - 50.0
-                ).degrees.radians
+                ) * PI / 180.0
             )))
         }
 

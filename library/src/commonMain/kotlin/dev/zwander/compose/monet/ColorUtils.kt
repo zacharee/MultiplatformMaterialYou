@@ -2,7 +2,6 @@ package dev.zwander.compose.monet
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import korlibs.math.clamp
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -202,9 +201,9 @@ object ColorUtils {
             }
         }
 
-        r = r.clamp(0, 255)
-        g = g.clamp(0, 255)
-        b = b.clamp(0, 255)
+        r = r.coerceIn(0..255)
+        g = g.coerceIn(0..255)
+        b = b.coerceIn(0..255)
 
         return Color(r, g, b).toArgb()
     }

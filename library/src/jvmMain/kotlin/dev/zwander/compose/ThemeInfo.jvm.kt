@@ -11,11 +11,13 @@ import androidx.compose.ui.graphics.toArgb
 import com.jthemedetecor.OsThemeDetector
 import com.sun.jna.platform.win32.Advapi32Util
 import com.sun.jna.platform.win32.WinReg
+import de.jangassen.jfa.appkit.NSUserDefaults
 import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.LinuxAccentColorGetter
-import dev.zwander.compose.util.UserDefaults
+import dev.zwander.compose.util.macOsColorKeyToColor
 import org.jetbrains.skiko.OS
 import org.jetbrains.skiko.hostOs
+import java.util.function.Consumer
 
 @Composable
 actual fun rememberThemeInfo(): ThemeInfo {
@@ -28,7 +30,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
     }
 
     DisposableEffect(osThemeDetector, isSupported) {
-        val listener = { darkMode: Boolean ->
+        val listener = Consumer { darkMode: Boolean ->
             dark = darkMode
         }
 
@@ -72,7 +74,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
                 }
             }
             OS.MacOS -> {
-                UserDefaults.standardUserDefaults().getAccentColor().toArgb()
+                macOsColorKeyToColor(NSUserDefaults.standardUserDefaults().objectForKey("AppleAccentColor")?.toIntOrNull()).toArgb()
             }
             OS.Linux -> {
                 (LinuxAccentColorGetter.getAccentColor() ?: defaultColor).toArgb()

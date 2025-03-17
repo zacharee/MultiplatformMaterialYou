@@ -1,3 +1,6 @@
+# 0.2.8
+- Fix JFA.
+
 # 0.2.7
 - Move away from using korlibs.
 

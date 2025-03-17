@@ -1,7 +1,7 @@
 [versions]
 android-gradle = "8.9.0"
 compose = "1.7.3"
-jfa = "bf819ca544"
+jfa = "715dbc9dc5"
 jna = "5.17.0"
 jsystemthemedetector = "7dde337429"
 kotlin = "2.1.10"

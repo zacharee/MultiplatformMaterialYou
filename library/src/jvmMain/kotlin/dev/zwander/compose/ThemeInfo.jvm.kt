@@ -74,7 +74,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
                 }
             }
             OS.MacOS -> {
-                macOsColorKeyToColor(NSUserDefaults.standardUserDefaults().objectForKey("AppleAccentColor")?.toIntOrNull()).toArgb()
+                macOsColorKeyToColor(NSUserDefaults.standardUserDefaults().objectForKey("AppleAccentColor")?.toString()?.toIntOrNull()).toArgb()
             }
             OS.Linux -> {
                 (LinuxAccentColorGetter.getAccentColor() ?: defaultColor).toArgb()

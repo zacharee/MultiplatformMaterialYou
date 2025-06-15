@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.interop.LocalUIViewController
+import androidx.compose.ui.uikit.LocalUIViewController
 import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.MacOSColors
 import dev.zwander.compose.util.TraitEffect
@@ -24,9 +24,26 @@ import platform.UIKit.UITraitCollection
 import platform.UIKit.UIUserInterfaceStyle
 import platform.UIKit.currentTraitCollection
 
+@Composable
+actual fun isSystemInDarkTheme(): Boolean {
+    var style: UIUserInterfaceStyle by remember {
+        mutableStateOf(UITraitCollection.currentTraitCollection.userInterfaceStyle)
+    }
+
+    val dark by remember {
+        derivedStateOf { style == UIUserInterfaceStyle.UIUserInterfaceStyleDark }
+    }
+
+    TraitEffect {
+        style = UITraitCollection.currentTraitCollection.userInterfaceStyle
+    }
+
+    return dark
+}
+
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-actual fun rememberThemeInfo(): ThemeInfo {
+actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
     val controller = LocalUIViewController.current
     val rootViewController = controller.view.window?.rootViewController
 
@@ -56,17 +73,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
         } ?: arrayOfNulls(4)
     }
 
-    var style: UIUserInterfaceStyle by remember {
-        mutableStateOf(UITraitCollection.currentTraitCollection.userInterfaceStyle)
-    }
 
-    val dark by remember {
-        derivedStateOf { style == UIUserInterfaceStyle.UIUserInterfaceStyleDark }
-    }
-
-    TraitEffect {
-        style = UITraitCollection.currentTraitCollection.userInterfaceStyle
-    }
 
     val seedColor = if (red != null && green != null && blue != null && alpha != null) {
         Color(red.toFloat(), green.toFloat(), blue.toFloat(), alpha.toFloat())
@@ -76,11 +83,11 @@ actual fun rememberThemeInfo(): ThemeInfo {
 
     val colorScheme = ColorScheme(
         seedColor,
-        dark
+        isDarkMode,
     ).toComposeColorScheme()
 
     val colors = ThemeInfo(
-        isDarkMode = dark,
+        isDarkMode = isDarkMode,
         colors = colorScheme,
         seedColor = Color(seedColor),
     )

@@ -4,7 +4,6 @@
 package dev.zwander.compose
 
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -17,11 +16,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-actual fun rememberThemeInfo(): ThemeInfo {
+actual fun isSystemInDarkTheme(): Boolean {
+    return androidx.compose.foundation.isSystemInDarkTheme()
+}
+
+@Composable
+actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
     val context = LocalContext.current
 
     val isAndroid12 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val dark = isSystemInDarkTheme()
     val isOneUI = remember {
         context.packageManager.hasSystemFeature("com.samsung.feature.samsung_experience_mobile") ||
                 context.packageManager.hasSystemFeature("com.samsung.feature.samsung_experience_mobile_lite")
@@ -29,8 +32,8 @@ actual fun rememberThemeInfo(): ThemeInfo {
     val isOneUIUPre611 = isOneUI &&
             Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
             (Class.forName("android.os.SystemProperties").getMethod("getInt", String::class.java, Int::class.java).invoke(null, "ro.build.version.oneui", 0) as Int) < 60101
-    val colorScheme = remember(dark, isAndroid12) {
-        if (dark) {
+    val colorScheme = remember(isDarkMode, isAndroid12) {
+        if (isDarkMode) {
             if (isAndroid12) {
                 if (isOneUIUPre611) {
                     dynamicDarkColorScheme31(dynamicTonalPalette(context))
@@ -55,7 +58,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
 
     return remember(colorScheme) {
         ThemeInfo(
-            isDarkMode = dark,
+            isDarkMode = isDarkMode,
             colors = colorScheme,
             seedColor = colorScheme.primary,
         )

@@ -20,7 +20,7 @@ import org.jetbrains.skiko.hostOs
 import java.util.function.Consumer
 
 @Composable
-actual fun rememberThemeInfo(): ThemeInfo {
+actual fun isSystemInDarkTheme(): Boolean {
     val (osThemeDetector, isSupported) = remember {
         OsThemeDetector.detector to OsThemeDetector.isSupported
     }
@@ -45,6 +45,11 @@ actual fun rememberThemeInfo(): ThemeInfo {
         }
     }
 
+    return dark
+}
+
+@Composable
+actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
     val accentColor = remember {
         val defaultColor = Color(red = 208, green = 188, blue = 255)
 
@@ -58,7 +63,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
                             "AccentColor",
                         )
                     ).rgb
-                } catch (e: Throwable) {
+                } catch (_: Throwable) {
                     try {
                         Color(
                             Advapi32Util.registryGetIntValue(
@@ -67,7 +72,7 @@ actual fun rememberThemeInfo(): ThemeInfo {
                                 "ColorizationColor",
                             )
                         ).copy(alpha = 1f).toArgb()
-                    } catch (e: Throwable) {
+                    } catch (_: Throwable) {
                         println("Unable to retrieve Windows accent color.")
                         defaultColor.toArgb()
                     }
@@ -85,13 +90,13 @@ actual fun rememberThemeInfo(): ThemeInfo {
         }
     }
 
-    val composeColorScheme = remember(accentColor, dark) {
-        ColorScheme(accentColor, dark).toComposeColorScheme()
+    val composeColorScheme = remember(accentColor, isDarkMode) {
+        ColorScheme(accentColor, isDarkMode).toComposeColorScheme()
     }
 
     return remember(composeColorScheme) {
         ThemeInfo(
-            isDarkMode = dark,
+            isDarkMode = isDarkMode,
             colors = composeColorScheme,
             seedColor = Color(accentColor),
         )

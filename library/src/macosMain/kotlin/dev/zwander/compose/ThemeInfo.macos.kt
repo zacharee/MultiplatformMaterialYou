@@ -14,15 +14,7 @@ import platform.Foundation.NSDistributedNotificationCenter
 import platform.Foundation.NSNotification
 
 @Composable
-actual fun rememberThemeInfo(): ThemeInfo {
-    var accentColor by remember {
-        mutableStateOf(
-            macOsColorKeyToColor(
-                NSUserDefaults.standardUserDefaults.objectForKey("AppleAccentColor")?.toString()?.toIntOrNull(),
-            )
-        )
-    }
-
+actual fun isSystemInDarkTheme(): Boolean {
     var isDark by remember {
         mutableStateOf(
             NSUserDefaults.standardUserDefaults.objectForKey("AppleInterfaceStyle") == "Dark"
@@ -31,9 +23,6 @@ actual fun rememberThemeInfo(): ThemeInfo {
 
     DisposableEffect(null) {
         val observer = { _: NSNotification? ->
-            accentColor = macOsColorKeyToColor(
-                NSUserDefaults.standardUserDefaults.objectForKey("AppleAccentColor")?.toString()?.toIntOrNull(),
-            )
             isDark = NSUserDefaults.standardUserDefaults.objectForKey("AppleInterfaceStyle") == "Dark"
         }
 
@@ -49,10 +38,42 @@ actual fun rememberThemeInfo(): ThemeInfo {
         }
     }
 
-    return remember(accentColor, isDark) {
+    return isDark
+}
+
+@Composable
+actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
+    var accentColor by remember {
+        mutableStateOf(
+            macOsColorKeyToColor(
+                NSUserDefaults.standardUserDefaults.objectForKey("AppleAccentColor")?.toString()?.toIntOrNull(),
+            )
+        )
+    }
+
+    DisposableEffect(null) {
+        val observer = { _: NSNotification? ->
+            accentColor = macOsColorKeyToColor(
+                NSUserDefaults.standardUserDefaults.objectForKey("AppleAccentColor")?.toString()?.toIntOrNull(),
+            )
+        }
+
+        NSDistributedNotificationCenter.defaultCenter.addObserverForName(
+            "AppleInterfaceThemeChangedNotification",
+            null,
+            null,
+            observer,
+        )
+
+        onDispose {
+            NSDistributedNotificationCenter.defaultCenter.removeObserver(observer)
+        }
+    }
+
+    return remember(accentColor, isDarkMode) {
         ThemeInfo(
-            isDarkMode = isDark,
-            colors = ColorScheme(accentColor.toArgb(), isDark).toComposeColorScheme(),
+            isDarkMode = isDarkMode,
+            colors = ColorScheme(accentColor.toArgb(), isDarkMode).toComposeColorScheme(),
             seedColor = accentColor,
         )
     }

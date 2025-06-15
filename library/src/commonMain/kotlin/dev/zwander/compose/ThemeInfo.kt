@@ -12,14 +12,18 @@ data class ThemeInfo(
 )
 
 @Composable
-expect fun rememberThemeInfo(): ThemeInfo
+expect fun rememberThemeInfo(isDarkMode: Boolean = isSystemInDarkTheme()): ThemeInfo
+
+@Composable
+expect fun isSystemInDarkTheme(): Boolean
 
 @Suppress("unused")
 @Composable
 fun DynamicMaterialTheme(
+    isDarkMode: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val themeInfo = rememberThemeInfo()
+    val themeInfo = rememberThemeInfo(isDarkMode = isDarkMode)
 
     MaterialTheme(
         content = content,

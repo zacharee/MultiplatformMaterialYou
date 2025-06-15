@@ -1,10 +1,10 @@
 [versions]
-android-gradle = "8.9.0"
-compose = "1.7.3"
+android-gradle = "8.10.1"
+compose = "1.8.1"
 jfa = "715dbc9dc5"
 jna = "5.17.0"
 jsystemthemedetector = "7dde337429"
-kotlin = "2.1.10"
+kotlin = "2.1.21"
 mavenPublish = "0.31.0"
 
 [libraries]

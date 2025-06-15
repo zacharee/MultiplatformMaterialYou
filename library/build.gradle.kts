@@ -59,7 +59,7 @@ kotlin {
         js(IR),
         wasmJs(),
     ).forEach {
-        it.moduleName = "MultiplatformMaterialYou"
+        it.outputModuleName.set("MultiplatformMaterialYou")
         it.browser()
     }
 

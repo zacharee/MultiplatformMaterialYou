@@ -1,3 +1,6 @@
+# 0.2.9
+- Allow overriding dark mode detection.
+
 # 0.2.8
 - Fix JFA.
 

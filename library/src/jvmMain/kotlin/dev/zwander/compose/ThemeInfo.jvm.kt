@@ -63,6 +63,7 @@ actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
                             "AccentColor",
                         )
                     ).let {
+                        // AccentColor is ABGR so we need to swap blue and red.
                         Color(it.blue, it.green, it.red).toArgb()
                     }
                 } catch (_: Throwable) {

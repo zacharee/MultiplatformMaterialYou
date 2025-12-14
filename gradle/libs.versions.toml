@@ -1,11 +1,11 @@
 [versions]
-android-gradle = "8.10.1"
-compose = "1.8.1"
+android-gradle = "8.13.2"
+compose = "1.9.3"
 jfa = "715dbc9dc5"
-jna = "5.17.0"
+jna = "5.18.1"
 jsystemthemedetector = "7dde337429"
-kotlin = "2.1.21"
-mavenPublish = "0.31.0"
+kotlin = "2.2.21"
+mavenPublish = "0.35.0"
 
 [libraries]
 jfa = { module = "com.github.zacharee:jfa", version.ref = "jfa" }

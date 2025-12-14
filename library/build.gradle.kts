@@ -143,7 +143,7 @@ kotlin {
 }
 
 android {
-    this.compileSdk = 34
+    this.compileSdk = 36
 
     defaultConfig {
         this.minSdk = 21

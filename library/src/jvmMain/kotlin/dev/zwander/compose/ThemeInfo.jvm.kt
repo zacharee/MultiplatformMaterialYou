@@ -62,7 +62,9 @@ actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
                             "Software\\Microsoft\\Windows\\DWM",
                             "AccentColor",
                         )
-                    ).rgb
+                    ).let {
+                        Color(it.blue, it.green, it.red).toArgb()
+                    }
                 } catch (_: Throwable) {
                     try {
                         Color(
@@ -71,7 +73,7 @@ actual fun rememberThemeInfo(isDarkMode: Boolean): ThemeInfo {
                                 "Software\\Microsoft\\Windows\\DWM",
                                 "ColorizationColor",
                             )
-                        ).copy(alpha = 1f).toArgb()
+                        ).toArgb()
                     } catch (_: Throwable) {
                         println("Unable to retrieve Windows accent color.")
                         defaultColor.toArgb()

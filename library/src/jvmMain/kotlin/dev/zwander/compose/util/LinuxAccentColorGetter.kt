@@ -55,6 +55,39 @@ sealed class DESpecificGetter(val sessionValue: String) {
         }
     }
 
+    data object UBUNTU : DESpecificGetter("ubuntu") {
+        override fun getAccentColor(): Color? {
+            val color = runtime?.getLinesFromCommand(arrayOf("gsettings", "get", "org.gnome.desktop.interface", "accent-color"))
+            ?.firstOrNull()
+            ?.trim()
+            // typical output is 'yellow' format, so remove the beginning and ending char
+            ?.removeSurrounding("'") 
+
+            // Colors sampled from Ubuntu 25.10 (questing) desktop
+            val rgb = when (color) {
+                "blue" -> "0,115,229"
+                "teal" -> "48,130,128"
+                "green" -> "75,133,1"
+                "yellow" -> "200,136,0"
+                "orange" -> "233,84,32"
+                "red" -> "218,52,80"
+                "pink" -> "179,76,179"
+                "purple" -> "119,100,216"
+                "slate" -> "101,123,105"
+                "brown" -> "179,145,105"
+                else -> null
+            }
+
+            if (rgb.isNullOrBlank()) {
+                return null
+            }
+
+            val (r, g, b) = rgb.split(",")
+
+            return Color(r.toInt(), g.toInt(), b.toInt())
+        }
+    }
+
     data object LXDE : DESpecificGetter("LXDE") {
         override fun getAccentColor(): Color? {
             val file = File("${System.getProperty("user.home")}/.config/lxsession/LXDE/desktop.conf")

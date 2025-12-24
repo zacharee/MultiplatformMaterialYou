@@ -6,7 +6,7 @@ Multiplatform Material You targets the following platforms:
 - Android
 - JVM
   - Windows 10 and later
-  - macOS Mojave and later
+  - macOS 12 and later
   - Linux (KDE, LXDE, partial support for GNOME)
 - iOS
 - macOS native (untested)

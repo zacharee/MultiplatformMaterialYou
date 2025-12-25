@@ -4,7 +4,7 @@ compose = "1.9.3"
 jfa = "715dbc9dc5"
 jna = "5.18.1"
 jsystemthemedetector = "7dde337429"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 mavenPublish = "0.35.0"
 
 [libraries]

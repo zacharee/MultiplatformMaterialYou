@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.toArgb
 import com.jthemedetecor.OsThemeDetector
 import com.sun.jna.platform.win32.Advapi32Util
 import com.sun.jna.platform.win32.WinReg
-import de.jangassen.jfa.appkit.NSUserDefaults
+import dev.zwander.jfa.appkit.NSUserDefaults
 import dev.zwander.compose.libmonet.scheme.ColorScheme
 import dev.zwander.compose.util.LinuxAccentColorGetter
 import dev.zwander.compose.util.macOsColorKeyToColor

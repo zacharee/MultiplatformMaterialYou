@@ -4,14 +4,14 @@ import androidx.compose.ui.graphics.Color
 
 fun macOsColorKeyToColor(key: Int?): Color {
     return when (key) {
-        -2 -> MacOSColors.ACCENT_BLUE
         -1 -> MacOSColors.ACCENT_GRAPHITE
         0 -> MacOSColors.ACCENT_RED
         1 -> MacOSColors.ACCENT_ORANGE
         2 -> MacOSColors.ACCENT_YELLOW
         3 -> MacOSColors.ACCENT_GREEN
-        4 -> MacOSColors.ACCENT_LILAC
-        5 -> MacOSColors.ACCENT_ROSE
+        4 -> MacOSColors.ACCENT_BLUE
+        5 -> MacOSColors.ACCENT_LILAC
+        6 -> MacOSColors.ACCENT_ROSE
         else -> MacOSColors.ACCENT_BLUE
     }
 }

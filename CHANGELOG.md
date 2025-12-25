@@ -1,3 +1,12 @@
+# 0.3.0
+- Add explicit KDE dark theme detection.
+- Add accent color retrieval for Ubuntu Desktop.
+- Fix macOS accent color mapping.
+- Hopefully fix compatibility with other libraries using other versions of JFA.
+
+# 0.2.10
+- Fix swapped red and blue channels on Windows.
+
 # 0.2.9
 - Allow overriding dark mode detection.
 

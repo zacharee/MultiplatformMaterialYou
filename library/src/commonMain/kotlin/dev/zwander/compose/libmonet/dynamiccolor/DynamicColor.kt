@@ -310,7 +310,7 @@ class DynamicColor {
                 return answer // No adjustment for colors with no background.
             }
 
-            val bgTone: Double = background!!(scheme).getTone(scheme)
+            val bgTone: Double = background(scheme).getTone(scheme)
 
             val desiredRatio = contrastCurve!!.get(scheme.contrastLevel)
 
@@ -337,8 +337,8 @@ class DynamicColor {
             if (secondBackground != null) {
                 // Case 3: Adjust for dual backgrounds.
 
-                val bgTone1: Double = background!!(scheme).getTone(scheme)
-                val bgTone2: Double = secondBackground!!(scheme).getTone(scheme)
+                val bgTone1: Double = background(scheme).getTone(scheme)
+                val bgTone2: Double = secondBackground(scheme).getTone(scheme)
 
                 val upper: Double = max(bgTone1, bgTone2)
                 val lower: Double = min(bgTone1, bgTone2)

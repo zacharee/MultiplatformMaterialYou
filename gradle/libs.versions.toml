@@ -1,13 +1,18 @@
 [versions]
 android-gradle = "8.13.2"
-compose = "1.9.3"
+compose = "1.10.3"
+compose-material3 = "1.9.0"
 jfa = "27f9e5a414"
 jna = "5.18.1"
-jsystemthemedetector = "e4ba26cabf"
-kotlin = "2.3.0"
-mavenPublish = "0.35.0"
+jsystemthemedetector = "dc3ca477a9"
+kotlin = "2.3.21"
+mavenPublish = "0.36.0"
 
 [libraries]
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-material3" }
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "compose" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
 jfa = { module = "com.github.zacharee:jfa", version.ref = "jfa" }
 jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
 jna-platform = { module = "net.java.dev.jna:jna-platform", version.ref = "jna" }

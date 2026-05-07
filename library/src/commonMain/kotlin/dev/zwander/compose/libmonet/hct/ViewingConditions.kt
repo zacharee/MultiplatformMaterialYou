@@ -86,7 +86,7 @@ class ViewingConditions
                 (if ((f >= 0.9))
                     lerp(0.59, 0.69, ((f - 0.9) * 10.0))
                 else
-                    lerp(0.525, 0.59, ((f - 0.8) * 10.0))).toDouble()
+                    lerp(0.525, 0.59, ((f - 0.8) * 10.0)))
             var d =
                 if (discountingIlluminant)
                     1.0

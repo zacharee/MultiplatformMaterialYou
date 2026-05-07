@@ -45,7 +45,6 @@ kotlin {
         iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
-        macosX64(),
         macosArm64(),
     ).forEach {
         it.binaries.framework {
@@ -76,10 +75,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(compose.foundation)
-                api(compose.material3)
-                api(compose.runtime)
-                api(compose.ui)
+                api(libs.compose.foundation)
+                api(libs.compose.material3)
+                api(libs.compose.runtime)
+                api(libs.compose.ui)
                 api(libs.kotlin.stdlib)
                 api(libs.kotlin.reflect)
             }
@@ -121,10 +120,6 @@ kotlin {
         }
 
         val macosArm64Main by getting {
-            dependsOn(macosMain)
-        }
-
-        val macosX64Main by getting {
             dependsOn(macosMain)
         }
 

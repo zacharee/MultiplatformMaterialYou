@@ -1,3 +1,7 @@
+# 0.4.0
+- Update dependencies including a major version upgrade of transitive oshi dependency.
+- Update to AGP 9.
+
 # 0.3.0
 - Add explicit KDE dark theme detection.
 - Add accent color retrieval for Ubuntu Desktop.

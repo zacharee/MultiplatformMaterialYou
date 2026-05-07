@@ -1,6 +1,7 @@
 # 0.4.0
 - Update dependencies including a major version upgrade of transitive oshi dependency.
 - Update to AGP 9.
+- Remove `macOSX64` target.
 
 # 0.3.0
 - Add explicit KDE dark theme detection.

@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlin.multiplatform.android.library)
 }
 
 group = "dev.zwander.compose.materialyou"
@@ -19,17 +19,6 @@ val javaVersionEnum: JavaVersion = JavaVersion.VERSION_21
 
 kotlin {
     jvmToolchain(javaVersionEnum.toString().toInt())
-
-    androidTarget {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    freeCompilerArgs.addAll("-opt-in=kotlin.RequiresOptIn", "-Xdont-warn-on-error-suppression")
-                    jvmTarget = JvmTarget.fromTarget(javaVersionEnum.toString())
-                }
-            }
-        }
-    }
 
     jvm {
         compilations.all {
@@ -69,6 +58,20 @@ kotlin {
                     freeCompilerArgs.addAll("-Xexpect-actual-classes", "-Xdont-warn-on-error-suppression")
                 }
             }
+        }
+    }
+
+    android {
+        withJava()
+
+        this.compileSdk = 36
+        this.minSdk = 21
+
+        namespace = "dev.zwander.compose.materialyou"
+
+        compilerOptions {
+            freeCompilerArgs.addAll("-opt-in=kotlin.RequiresOptIn", "-Xdont-warn-on-error-suppression")
+            jvmTarget.set(JvmTarget.fromTarget(javaVersionEnum.toString()))
         }
     }
 
@@ -135,28 +138,6 @@ kotlin {
             dependsOn(jsAndWasmMain)
         }
     }
-}
-
-android {
-    this.compileSdk = 36
-
-    defaultConfig {
-        this.minSdk = 21
-    }
-
-    namespace = "dev.zwander.compose.materialyou"
-
-    compileOptions {
-        sourceCompatibility = javaVersionEnum
-        targetCompatibility = javaVersionEnum
-    }
-
-    buildFeatures {
-        aidl = true
-    }
-
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
 }
 
 tasks.withType<Copy> {
